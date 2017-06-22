@@ -1,10 +1,11 @@
-const Discord = require('discord.js')
-const db = require('./stardb.json')
-const client = new Discord.Client({ disableEveryone: true })
-const settings = { prefix: '!', 
-				   token: 'MzE4NzYyMzIzNTEyOTE4MDE2.DCzlpw.9j6QK96Hjg9btMqHBcUiDvGO4vQ',
-				   embedColor: '#f7d524' }
-let currentlyPlaying = 0
+const db        = require('./stardb.json')
+const Discord   = require('discord.js')
+const client    = new Discord.Client({ disableEveryone: true })
+const settings  = { prefix: '!', 
+					token: 'MzE4NzYyMzIzNTEyOTE4MDE2.DCzlpw.9j6QK96Hjg9btMqHBcUiDvGO4vQ', 
+					embedColor: '#f7d524',
+					starboardChannelID: '327333249678442516' }
+let currentlyPlaying = Math.floor(Math.random() * Object.keys(db).length)
 let boolPlaying
 
 client.on('ready', () => {
@@ -63,11 +64,27 @@ client.on('message', async msg => {
 	}
 
 	if (cmd === 'nowplaying' || cmd === 'np') {
+		if (!boolPlaying)
+			return msg.channel.send('placeholder message for the "not playing" error')
 		msg.channel.send({
 			embed: new Discord.RichEmbed()
 				.setColor(settings.embedColor)
 				.addField('Now Playing:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
 				.addField('Next in queue:', `[${db[(currentlyPlaying + 1) % (Object.keys(db).length + 1)].name}](${db[(currentlyPlaying + 1) % (Object.keys(db).length + 1)].link})`, true)
+		})
+	}
+
+	if (cmd === 'save') {
+		if (!boolPlaying)
+			return msg.channel.send('placeholder message for the "not playing" error')
+		msg.author.send({
+			embed: new Discord.RichEmbed()
+				.setColor(settings.embedColor)
+				.addField('Now Playing:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
+		}).then(() => {
+			msg.channel.send('👌')
+		}).catch(() => {
+			msg.channel.send('❌😩') // you should do the memey stuff :v
 		})
 	}
 })
@@ -76,7 +93,7 @@ client.on('messageReactionAdd', (messageReaction, user) => {
 	if (messageReaction.emoji.name === '⭐') {
 		client.channels.get(messageReaction.message.channel.id).fetchMessage(messageReaction.message.id).then(() => {
 			if (messageReaction.count > 1) return
-			else client.channels.get('327333249678442516').send({
+			else client.channels.get(settings.starboardChannelID).send({
 				embed: new Discord.RichEmbed()
 					.setAuthor(messageReaction.message.author.tag + ' ⭐', messageReaction.message.author.avatarURL)
 					.setColor(settings.embedColor)
