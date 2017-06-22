@@ -42,24 +42,16 @@ client.on('message', msg => {
 				msg.reply('join a voice channel fam')
 			})
 		} else {
-			let random = parseInt(Math.floor((Math.random() * 25) + 1))
 			if (!client.voiceConnections.get(msg.guild.id)) {
 				msg.react('🌟')
 				msg.member.voiceChannel.join().then(conn => {
-					conn.playFile(db.random.path)
-					msg.channel.send({
-						embed: new Discord.RichEmbed()
-							.setColor("#f7d524")
-							.setDescription(`[${db.random.name}](${db.random.link})`)
-					})
+					let file = Math.floor((Math.random() * 25) + 1)
+					conn.playFile(`./stars/${file}.mp3`)
+				
 					conn.player.dispatcher.on('end', () => {
-						let random = parseInt(Math.floor((Math.random() * 25) + 1))
-						conn.playFile(db.random.path)
-						msg.channel.send({
-							embed: new Discord.RichEmbed()
-								.setColor("#f7d524")
-								.setDescription(`[${db.random.name}](${db.random.link})`)
-						})
+						let file = Math.floor((Math.random() * 25) + 1)
+						conn.playFile(`./stars/${file}.mp3`)
+						
 					})
 				}).catch(e => {
 					msg.reply('Couldn\'t join your voicechannel ¯\\_(ツ)_/¯')
