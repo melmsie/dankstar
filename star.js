@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const db = require("./stardb.json")
 const client = new Discord.Client({
 	disableEveryone: true
 })
@@ -45,14 +46,20 @@ client.on('message', msg => {
 			if (!client.voiceConnections.get(msg.guild.id)) {
 				msg.react('🌟')
 				msg.member.voiceChannel.join().then(conn => {
-					conn.playFile(random.path)
+					conn.playFile(db.random.path)
 					msg.channel.send({
 						embed: new Discord.RichEmbed()
 							.setColor("#f7d524")
-							.setDescription(`[${random.name}](${random.link})`)
+							.setDescription(`[${db.random.name}](${db.random.link})`)
 					})
 					conn.player.dispatcher.on('end', () => {
-						conn.playFile('./star.mp3')
+						let random = Math.floor((Math.random() * 25) + 1)
+						conn.playFile(db.random.path)
+						msg.channel.send({
+							embed: new Discord.RichEmbed()
+								.setColor("#f7d524")
+								.setDescription(`[${db.random.name}](${db.random.link})`)
+						})
 					})
 				}).catch(e => {
 					msg.reply('Couldn\'t join your voicechannel ¯\\_(ツ)_/¯')
