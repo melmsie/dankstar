@@ -46,7 +46,7 @@ client.on('message', msg => {
 				msg.react('🌟')
 				msg.member.voiceChannel.join().then(conn => {
 					conn.playFile('./star.mp3')
-					conn.player.dispatcher.once('end', () => {
+					conn.player.dispatcher.on('end', () => {
 						conn.playFile('./star.mp3')
 					})
 				}).catch(e => {
