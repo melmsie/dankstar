@@ -7,6 +7,19 @@ client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`)
 });
 
+
+function timeCon(time) {
+	let days = Math.floor((time % 31536000) / 86400)
+	let hours = Math.floor(((time % 31536000) % 86400) / 3600)
+	let minutes = Math.floor((((time % 31536000) % 86400) % 3600) / 60)
+	let seconds = Math.round((((time % 31536000) % 86400) % 3600) % 60)
+	days = days > 9 ? days : days
+	hours = hours > 9 ? hours : hours
+	minutes = minutes > 9 ? minutes : minutes
+	seconds = seconds > 9 ? seconds : seconds
+	return (parseInt(days) > 0 ? days + (days > 1 ? ' days ' : ' day ') : '') + (parseInt(hours) === 0 && parseInt(days) === 0 ? '' : hours + (hours > 1 ? ' hours ' : ' hour ')) + (parseInt(minutes) === 0 && parseInt(hours) === 0 && parseInt(days) === 0 ? '' : minutes + (minutes > 1 ? ' minutes ' : ' minute ')) + seconds + (seconds > 1 ? ' seconds ' : ' second ')
+}
+
 client.on('message', msg => {
 	if (msg.author.id != '172571295077105664') return
 
@@ -28,7 +41,7 @@ client.on('message', msg => {
 				msg.reply('join a voice channel fam')
 			})
 		} else {
-			
+
 			if (!client.voiceConnections.get(msg.guild.id)) {
 				msg.react('🌟')
 				msg.member.voiceChannel.join().then(conn => {
@@ -53,8 +66,16 @@ client.on('message', msg => {
 			msg.react('😢')
 		}
 	}
-	
 
+	if (msg.content.includes('!stats')) {
+		msg.channel.send({
+			embed: new Discord.RichEmbed()
+				.setColor("#f7d524")
+				.addField("Uptime", `${timeCon(process.uptime())}`, true)
+				.addField("RAM Usage", `${((process.memoryUsage().heapUsed / 1024) / 1024).toFixed(2)} MB`, true)
+				.addField("Websocket Ping", `${(client.ping).toFixed(0)} ms`, true)
+		})
+	}
 
 
 
