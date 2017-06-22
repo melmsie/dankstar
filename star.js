@@ -21,7 +21,11 @@ function timeCon(time) {
 	return (parseInt(days) > 0 ? days + (days > 1 ? ' days ' : ' day ') : '') + (parseInt(hours) === 0 && parseInt(days) === 0 ? '' : hours + (hours > 1 ? ' hours ' : ' hour ')) + (parseInt(minutes) === 0 && parseInt(hours) === 0 && parseInt(days) === 0 ? '' : minutes + (minutes > 1 ? ' minutes ' : ' minute ')) + seconds + (seconds > 1 ? ' seconds ' : ' second ')
 }
 
-
+function play(conn) {
+	let file = Math.floor((Math.random() * 25) + 1)
+	conn.playFile(`./stars/${file}.mp3`);
+	conn.dispatcher.on('end', () => play(conn));
+}
 
 client.on('message', async msg => {
 	if (msg.author.id != '172571295077105664') return
@@ -38,12 +42,6 @@ client.on('message', async msg => {
 		}
 	}
 
-	function play(conn) {
-		let file = Math.floor((Math.random() * 25) + 1)
-		conn.playFile(`./stars/${file}.mp3`);
-		conn.dispatcher.on('end', () => play(conn));
-	}
-	
 	if (msg.content.includes('!radio')) {
 		if (!msg.member.voiceChannel) {
 			msg.react('❌').then(() => {
@@ -73,7 +71,7 @@ client.on('message', async msg => {
 			embed: new Discord.RichEmbed()
 				.setColor("#f7d524")
 				.addField("Uptime", `${timeCon(process.uptime())}`, true)
-				.addField("RAM Usage", `${((process.memoryUsage().heapUsed / 1024) / 1024).toFixed(2)} MB`, true)
+				.addField("RAM Usage", `${(process.memoryUsage().rss / 1048576).toFixed()}MB`, true)
 				.addField("Websocket Ping", `${(client.ping).toFixed(0)} ms`, true)
 		})
 	}
