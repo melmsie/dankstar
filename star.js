@@ -55,7 +55,7 @@ client.on('message', async msg => {
 	if (cmd === 'stats') {
 		msg.channel.send({
 			embed: new Discord.RichEmbed()
-				.setColor('#f7d524')
+				.setColor(settings.embedColor)
 				.addField('Uptime', timeCon(process.uptime()), true)
 				.addField('RAM Usage', `${(process.memoryUsage().rss / 1048576).toFixed()}MB`, true)
 				.addField('Websocket Ping', `${(client.ping).toFixed(0)} ms`, true)
@@ -65,7 +65,7 @@ client.on('message', async msg => {
 	if (cmd === 'nowplaying' || cmd === 'np') {
 		msg.channel.send({
 			embed: new Discord.RichEmbed()
-				.setColor('#f7d524')
+				.setColor(settings.embedColor)
 				.addField('Now Playing:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
 				.addField('Next in queue:', `[${db[(currentlyPlaying + 1) % (Object.keys(db).length + 1)].name}](${db[(currentlyPlaying + 1) % (Object.keys(db).length + 1)].link})`, true)
 		})
@@ -79,7 +79,7 @@ client.on('messageReactionAdd', (messageReaction, user) => {
 			else client.channels.get('327333249678442516').send({
 				embed: new Discord.RichEmbed()
 					.setAuthor(messageReaction.message.author.tag + ' ⭐', messageReaction.message.author.avatarURL)
-					.setColor('#f7d524')
+					.setColor(settings.embedColor)
 					.setDescription(messageReaction.message.content)
 					.setTimestamp(new Date(messageReaction.message.createdTimestamp))
 					.setFooter('#' + messageReaction.message.channel.name)
