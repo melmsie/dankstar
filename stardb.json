@@ -1,0 +1,127 @@
+{
+	"1": {
+		"link": "https://www.youtube.com/watch?v=5xxQs34UMx4",
+		"name": "Smash Mouth All Star with Lyrics",
+		"path": "./stars/1.mp3"
+	},
+	"2": {
+		"link": "https://www.youtube.com/watch?v=E6al4UWbbWs",
+		"name": "\"Bring me to Life\" but it's performed by Smash Mouth but it's still to the tune of the original song",
+		"path": "./stars/2.mp3"
+	},
+	"3": {
+		"link": "https://www.youtube.com/watch?v=hmW_ewCIrU0",
+		"name": "All Star but it's Fireflies",
+		"path": "./stars/3.mp3"
+	},
+	"4": {
+		"link": "https://www.youtube.com/watch?v=KelFDPAPUyY",
+		"name": "All Star but the vocals have been shifted back one beat",
+		"path": "./stars/4.mp3"
+	},
+	"5": {
+		"link": "https://www.youtube.com/watch?v=Mq1QBDBf52k&feature=youtu.be",
+		"name": "The Living Tombstone - Super Smash Mouth Bros",
+		"path": "./stars/5.mp3"
+	},
+	"6": {
+		"link": "https://www.youtube.com/watch?v=K3Fn1RgMzYI",
+		"name": "All Star but it's Smooth Jazz",
+		"path": "./stars/6.mp3"
+	},
+	"7": {
+		"link": "https://www.youtube.com/watch?v=fGgOzxg2lRI",
+		"name": "All Star But It's 24 Cartoon Impressions",
+		"path": "./stars/7.mp3"
+	},
+	"8": {
+		"link": "https://www.youtube.com/watch?v=k2ByHspr9sQ",
+		"name": "\"All Star\" but it's Sweet Home Alabama",
+		"path": "./stars/8.mp3"
+	},
+	"9": {
+		"link": "https://www.youtube.com/watch?v=LSVqpHQbZh4",
+		"name": "All Star but all rhymes are swapped",
+		"path": "./stars/9.mp3"
+	},
+	"10": {
+		"link": "https://www.youtube.com/watch?v=Fnn5VfK6JGU",
+		"name": "SEINFELD x SMASHMOUTH MASHUP",
+		"path": "./stars/10.mp3"
+	},
+	"11": {
+		"link": "https://www.youtube.com/watch?v=O4NH8mxmypo",
+		"name": "Wake Me Up When All Star Ends - Green Day vs Smash Mouth Mashup",
+		"path": "./stars/11.mp3"
+	},
+	"12": {
+		"link": "https://www.youtube.com/watch?v=36OLTWeeENM",
+		"name": "all star but the only lyrics are the first two lines (pitch corrected)",
+		"path": "./stars/12.mp3"
+	},
+	"13": {
+		"link": "https://www.youtube.com/watch?v=uBudLS8QX-I",
+		"name": "\"All Star\" but it's High School Musical",
+		"path": "./stars/13.mp3"
+	},
+	"14": {
+		"link": "https://www.youtube.com/watch?v=YkYlnKlDrTg",
+		"name": "All Star But It Smells Like Teen Spirit",
+		"path": "./stars/14.mp3"
+	},
+	"15": {
+		"link": "https://www.youtube.com/watch?v=tnCejHuqWLM",
+		"name": "Ed Sheeran - 'Shape of You' but it's Smash Mouth singing 'All Star'",
+		"path": "./stars/15.mp3"
+	},
+	"16": {
+		"link": "https://www.youtube.com/watch?v=I2Le6YW5vWg",
+		"name": "All Star but it's Take On Me",
+		"path": "./stars/16.mp3"
+	},
+	"17": {
+		"link": "https://www.youtube.com/watch?v=juif7J5mKNs",
+		"name": "All star but everything is a shed",
+		"path": "./stars/17.mp3"
+	},
+	"18": {
+		"link": "https://www.youtube.com/watch?v=DapzFhNGWAM",
+		"name": "All Star but the LYRICS are backwards while the SONG is fine",
+		"path": "./stars/18.mp3"
+	},
+	"19": {
+		"link": "https://www.youtube.com/watch?v=oKSpHKNo1fM",
+		"name": "All Star But The Verses Are Changed",
+		"path": "./stars/19.mp3"
+	},
+	"20": {
+		"link": "https://www.youtube.com/watch?v=Dt4mWcH63us",
+		"name": "All Star But They Don't Stop Coming And It Gets Really Dank",
+		"path": "./stars/20.mp3"
+	},
+	"21": {
+		"link": "https://www.youtube.com/watch?v=woe2tvl2caw",
+		"name": "Allstar but it's Frozen",
+		"path": "./stars/21.mp3"
+	},
+	"22": {
+		"link": "https://www.youtube.com/watch?v=1C-9Y1sifXw",
+		"name": "All Star but it's played in 10 genres",
+		"path": "./stars/22.mp3"
+	},
+	"23": {
+		"link": "https://www.youtube.com/watch?v=z1ybegrx7Hs",
+		"name": "Donald Trump Singing \"All-Star\" by Smashmouth",
+		"path": "./stars/23.mp3"
+	},
+	"24": {
+		"link": "https://www.youtube.com/watch?v=4XCTT76BQXU",
+		"name": "Smash Mouth - All Star (Sung in 25 Voices)",
+		"path": "./stars/24.mp3"
+	},
+	"25": {
+		"link": "https://www.youtube.com/watch?v=J48dqyz_C6s",
+		"name": "We Are Number One but it's All Star by Smash Mouth",
+		"path": "./stars/25.mp3"
+	}
+}
