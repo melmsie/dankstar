@@ -21,7 +21,9 @@ function timeCon(time) {
 	return (parseInt(days) > 0 ? days + (days > 1 ? ' days ' : ' day ') : '') + (parseInt(hours) === 0 && parseInt(days) === 0 ? '' : hours + (hours > 1 ? ' hours ' : ' hour ')) + (parseInt(minutes) === 0 && parseInt(hours) === 0 && parseInt(days) === 0 ? '' : minutes + (minutes > 1 ? ' minutes ' : ' minute ')) + seconds + (seconds > 1 ? ' seconds ' : ' second ')
 }
 
-client.on('message', msg => {
+
+
+client.on('message', async msg => {
 	if (msg.author.id != '172571295077105664') return
 
 	if (msg.content.includes('!eval')) {
@@ -36,6 +38,12 @@ client.on('message', msg => {
 		}
 	}
 
+	function play(conn) {
+		let file = Math.floor((Math.random() * 25) + 1)
+		conn.playFile(`./stars/${file}.mp3`);
+		conn.dispatcher.on('end', () => play(conn));
+	}
+	
 	if (msg.content.includes('!radio')) {
 		if (!msg.member.voiceChannel) {
 			msg.react('❌').then(() => {
@@ -44,19 +52,8 @@ client.on('message', msg => {
 		} else {
 			if (!client.voiceConnections.get(msg.guild.id)) {
 				msg.react('🌟')
-				msg.member.voiceChannel.join().then(conn => {
-					let file = Math.floor((Math.random() * 25) + 1)
-					conn.playFile(`./stars/${file}.mp3`)
-				
-					conn.player.dispatcher.on('end', () => {
-						let file = Math.floor((Math.random() * 25) + 1)
-						conn.playFile(`./stars/${file}.mp3`)
-						
-					})
-				}).catch(e => {
-					msg.reply('Couldn\'t join your voicechannel ¯\\_(ツ)_/¯')
-					console.log(`${new Date()}: ${e.message}`)
-				})
+				const conn = await msg.member.voiceChannel.join()
+				play(conn)
 
 			} else {
 				msg.react('❌')
