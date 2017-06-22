@@ -42,7 +42,7 @@ client.on('message', msg => {
 				msg.reply('join a voice channel fam')
 			})
 		} else {
-			let random = Math.floor((Math.random() * 25) + 1)
+			let random = parseInt(Math.floor((Math.random() * 25) + 1))
 			if (!client.voiceConnections.get(msg.guild.id)) {
 				msg.react('🌟')
 				msg.member.voiceChannel.join().then(conn => {
@@ -53,7 +53,7 @@ client.on('message', msg => {
 							.setDescription(`[${db.random.name}](${db.random.link})`)
 					})
 					conn.player.dispatcher.on('end', () => {
-						let random = Math.floor((Math.random() * 25) + 1)
+						let random = parseInt(Math.floor((Math.random() * 25) + 1))
 						conn.playFile(db.random.path)
 						msg.channel.send({
 							embed: new Discord.RichEmbed()
