@@ -16,6 +16,8 @@ client.on('message', async msg => {
 
 	const cmd = msg.content.toLowerCase().substring(settings.prefix.length).split(' ')[0];
 
+	if (!msg.content.toLowerCase().startsWith(settings.prefix)) return
+
 	if (cmd === 'stats') {
 		msg.channel.send({
 			embed: new Discord.RichEmbed()
