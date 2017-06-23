@@ -13,9 +13,45 @@ client.on('ready', () => {
 })
 
 client.on('message', async msg => {
-	if (!['284122164582416385', '172571295077105664'].includes(msg.author.id)) return
 
 	const cmd = msg.content.toLowerCase().substring(settings.prefix.length).split(' ')[0];
+
+	if (cmd === 'stats') {
+		msg.channel.send({
+			embed: new Discord.RichEmbed()
+				.setColor(settings.embedColor)
+				.addField('Uptime', timeCon(process.uptime()), true)
+				.addField('RAM Usage', `${(process.memoryUsage().rss / 1048576).toFixed()}MB`, true)
+				.addField('Websocket Ping', `${(client.ping).toFixed(0)} ms`, true)
+		})
+	}
+
+	if (cmd === 'nowplaying' || cmd === 'np') {
+		if (!boolPlaying)
+			return msg.channel.send('placeholder message for the "not playing" error')
+		msg.channel.send({
+			embed: new Discord.RichEmbed()
+				.setColor(settings.embedColor)
+				.addField('Now Playing:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
+				.addField('Next in queue:', `[${db[(currentlyPlaying + 1) % 25].name}](${db[(currentlyPlaying + 1) % 25].link})`, true)
+		})
+	}
+
+	if (cmd === 'save') {
+		if (!boolPlaying)
+			return msg.channel.send('placeholder message for the "not playing" error')
+		msg.author.send({
+			embed: new Discord.RichEmbed()
+				.setColor(settings.embedColor)
+				.addField('Now Playing:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
+		}).then(() => {
+			msg.channel.send('👌')
+		}).catch(() => {
+			msg.channel.send('❌😩') // you should do the memey stuff :v
+		})
+	}
+
+	if (!['284122164582416385', '172571295077105664'].includes(msg.author.id)) return
 
 	if (cmd === 'eval') {
 		const args = msg.content.split(' ').slice(1)
@@ -51,41 +87,6 @@ client.on('message', async msg => {
 			client.voiceConnections.get(msg.guild.id).channel.leave()
 			msg.react('😢')
 		}
-	}
-
-	if (cmd === 'stats') {
-		msg.channel.send({
-			embed: new Discord.RichEmbed()
-				.setColor(settings.embedColor)
-				.addField('Uptime', timeCon(process.uptime()), true)
-				.addField('RAM Usage', `${(process.memoryUsage().rss / 1048576).toFixed()}MB`, true)
-				.addField('Websocket Ping', `${(client.ping).toFixed(0)} ms`, true)
-		})
-	}
-
-	if (cmd === 'nowplaying' || cmd === 'np') {
-		if (!boolPlaying)
-			return msg.channel.send('placeholder message for the "not playing" error')
-		msg.channel.send({
-			embed: new Discord.RichEmbed()
-				.setColor(settings.embedColor)
-				.addField('Now Playing:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
-				.addField('Next in queue:', `[${db[(currentlyPlaying + 1) % 25].name}](${db[(currentlyPlaying + 1) % 25].link})`, true)
-		})
-	}
-
-	if (cmd === 'save') {
-		if (!boolPlaying)
-			return msg.channel.send('placeholder message for the "not playing" error')
-		msg.author.send({
-			embed: new Discord.RichEmbed()
-				.setColor(settings.embedColor)
-				.addField('Now Playing:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
-		}).then(() => {
-			msg.channel.send('👌')
-		}).catch(() => {
-			msg.channel.send('❌😩') // you should do the memey stuff :v
-		})
 	}
 })
 
@@ -145,7 +146,7 @@ function timeCon(time) {
 
 function play(conn) {
 	if (currentlyPlaying >= 25)
-		currentlyPlaying = 1;
+		currentlyPlaying = 0;
 	currentlyPlaying++;
 	if (boolPlaying) {
 		client.user.setGame(db[currentlyPlaying].name)
