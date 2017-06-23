@@ -70,7 +70,7 @@ client.on('message', async msg => {
 			embed: new Discord.RichEmbed()
 				.setColor(settings.embedColor)
 				.addField('Now Playing:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
-				.addField('Next in queue:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
+				.addField('Next in queue:', `[${db[(currentlyPlaying + 1) % 25].name}](${(db[currentlyPlaying + 1) % 25].link})`, true)
 		})
 	}
 
