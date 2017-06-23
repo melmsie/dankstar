@@ -144,7 +144,7 @@ function timeCon(time) {
 }
 
 function play(conn) {
-	if (currentlyPlaying => 25)
+	if (currentlyPlaying >= 25)
 		currentlyPlaying = 1;
 	currentlyPlaying++;
 	if (boolPlaying) {
