@@ -70,7 +70,7 @@ client.on('message', async msg => {
 			embed: new Discord.RichEmbed()
 				.setColor(settings.embedColor)
 				.addField('Now Playing:', `[${db[currentlyPlaying].name}](${db[currentlyPlaying].link})`, true)
-				.addField('Next in queue:', `[${db[(currentlyPlaying + 1) % 25].name}](${(db[currentlyPlaying + 1) % 25].link})`, true)
+				.addField('Next in queue:', `[${db[(currentlyPlaying + 1) % 25].name}](${db[(currentlyPlaying + 1) % 25].link})`, true)
 		})
 	}
 
@@ -144,7 +144,7 @@ function timeCon(time) {
 }
 
 function play(conn) {
-	if (currentlyPlaying > 25)
+	if (currentlyPlaying => 25)
 		currentlyPlaying = 1;
 	currentlyPlaying++;
 	if (boolPlaying) {
