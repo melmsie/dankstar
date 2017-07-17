@@ -87,7 +87,7 @@ client.on('messageReactionAdd', (messageReaction, user) => {
 	if (messageReaction.emoji.name == '⭐') {
 		client.channels.get(messageReaction.message.channel.id).fetchMessage(messageReaction.message.id).then(() => {
 			if (messageReaction.count > 1) return
-			else client.channels.get('327333249678442516').send({
+			else client.channels.get('327317783937417236').send({
 				embed: new Discord.RichEmbed()
 					.setAuthor(messageReaction.message.author.tag + ' ⭐', messageReaction.message.author.avatarURL)
 					.setColor('#f7d524')
